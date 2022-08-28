@@ -1,0 +1,14 @@
+# 1
+SELECT temp.customer_number
+FROM (SELECT customer_number, COUNT(customer_number) AS CN
+      FROM Orders
+      GROUP BY customer_number
+      ORDER BY CN DESC
+      LIMIT 1) AS temp
+
+# 2
+SELECT customer_number
+FROM Orders
+GROUP BY customer_number
+ORDER BY COUNT(customer_number) DESC
+LIMIT 1

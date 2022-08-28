@@ -44,7 +44,7 @@ class Solution:
     #         return head
     #
     #     back, mid, front = None, head, head.next
-    # 
+    #
     #     while front:
     #         mid.next = back
     #         back = mid
