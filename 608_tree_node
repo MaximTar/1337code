@@ -1,0 +1,26 @@
+# 1
+SELECT DISTINCT l.id,
+    CASE
+        WHEN l.p_id IS NULL THEN 'Root'
+        WHEN r.p_id IS NULL THEN 'Leaf'
+        ELSE 'Inner'
+    END AS type
+FROM Tree AS l LEFT JOIN Tree AS r on l.id = r.p_id
+ORDER BY 1
+
+# 2
+SELECT id,
+    CASE
+        WHEN id = (SELECT id FROM Tree WHERE p_id IS NULL) THEN 'Root'
+        WHEN id IN (SELECT p_id FROM Tree) THEN 'Inner'
+        ELSE 'Leaf'
+    END AS type
+FROM Tree
+ORDER BY 1
+
+# 3
+SELECT id,
+    IF(p_id IS NULL, 'Root',
+       IF(id IN (SELECT p_id FROM tree), 'Inner', 'Leaf')) AS type
+FROM Tree
+ORDER BY 1
