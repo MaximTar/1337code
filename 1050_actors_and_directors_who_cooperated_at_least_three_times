@@ -1,0 +1,12 @@
+# 1
+SELECT actor_id, director_id
+FROM (SELECT actor_id, director_id, COUNT(*) AS counter
+      FROM ActorDirector
+      GROUP BY 1, 2) AS Temp
+WHERE counter > 2
+
+# 2
+SELECT actor_id, director_id
+FROM ActorDirector
+GROUP BY 1, 2
+HAVING COUNT(1) > 2
